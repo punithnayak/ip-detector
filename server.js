@@ -1,11 +1,12 @@
 const express = require('express');
+const cors = require('cors'); // Import cors
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Trust proxy if deployed behind one (e.g., Heroku, Render)
 app.set('trust proxy', true);
 
-// Route to get client IP as JSON
+app.use(cors());
+
 app.get('/', (req, res) => {
   const ip =
     req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
